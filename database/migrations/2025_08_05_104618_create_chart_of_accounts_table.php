@@ -13,6 +13,15 @@ return new class extends Migration
     {
         Schema::create('chart_of_accounts', function (Blueprint $table) {
             $table->id();
+            $table->string('gl_code');
+            $table->string('name');
+            $table->string('account_type');
+            $table->foreignId('parent_account_id')
+                    ->nullable()
+                    ->constrained('chart_of_accounts')
+                    ->onDelete('cascade');
+            $table->text('description')->nullable();
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
