@@ -10,7 +10,7 @@ class ChartOfAccounts extends Model
     use HasFactory;
 
        protected $fillable = [
-        'account_code',
+        'gl_code',
         'account_name',
         'account_type',
         'parent_account_id',

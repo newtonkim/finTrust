@@ -1,9 +1,13 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
-use Illuminate\Foundation\Application;
-use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Foundation\Application;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\SubLedgersController;
+use App\Http\Controllers\GeneralLedgerController;
+use App\Http\Controllers\ChartOfAccountsController;
+
 
 Route::get('/', function () {
     return Inertia::render('Welcome', [
@@ -18,10 +22,16 @@ Route::get('/dashboard', function () {
     return Inertia::render('Dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+
+    Route::resource('chart-of-accounts', ChartOfAccountsController::class);
+    Route::resource('general-ledger', GeneralLedgerController::class)->only(['index', 'show', 'store']); // GL might be more read-heavy
+    Route::resource('sub-ledgers', SubLedgersController::class);
+    // Add specific routes for sub-ledger transactions if needed
+
 });
 
 require __DIR__.'/auth.php';
