@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('sub_ledgers', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->string('name')->unique(); // e.g., 'Accounts Receivable', 'Accounts Payable'
             $table->text('description')->nullable();
+             // Foreign key to link to the Chart of Accounts controlling account
             $table->foreignId('chart_of_account_id')->constrained()->onDelete('cascade');
             $table->timestamps();
         });

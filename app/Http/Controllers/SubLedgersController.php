@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use Inertia\Inertia;
+use Inertia\Response;
+use App\Models\SubLedger;
 use Illuminate\Http\Request;
+use App\Models\ChartOfAccounts;
+use Illuminate\Http\RedirectResponse;
 
 class SubLedgersController extends Controller
 {
@@ -13,8 +18,9 @@ class SubLedgersController extends Controller
     public function index(): Response
     {
         // Eager load the controlling chart of accounts for each sub-ledger
-        $subLedgers = SubLedger::with('chartOfAccount')->paginate(15);
-        $chartOfAccounts = ChartOfAccount::select('id', 'account_name', 'account_code')->get();
+        $subLedgers = SubLedger::with('chartOfAccount')->paginate(10);
+        
+        $chartOfAccounts = ChartOfAccounts::select('id', 'account_name', 'gl_code')->get();
 
         return Inertia::render('SubLedgers/Index', [
             'subLedgers' => $subLedgers,
@@ -36,7 +42,8 @@ class SubLedgersController extends Controller
 
         SubLedger::create($request->all());
 
-        return redirect()->route('sub-ledgers.index')->with('success', 'Sub-ledger created successfully.');
+        return redirect()->route('sub-ledgers.index')
+                         ->with('success', 'Sub-ledger created successfully.');
     }
 
 
@@ -53,7 +60,8 @@ class SubLedgersController extends Controller
 
         $subLedger->update($request->all());
 
-        return redirect()->route('sub-ledgers.index')->with('success', 'Sub-ledger updated successfully.');
+        return redirect()->route('sub-ledgers.index')
+                         ->with('success', 'Sub-ledger updated successfully.');
     }
 
     /**
@@ -63,6 +71,7 @@ class SubLedgersController extends Controller
     {
         $subLedger->delete();
 
-        return redirect()->route('sub-ledgers.index')->with('success', 'Sub-ledger deleted successfully.');
+        return redirect()->route('sub-ledgers.index')
+                         ->with('success', 'Sub-ledger deleted successfully.');
     }
 }
