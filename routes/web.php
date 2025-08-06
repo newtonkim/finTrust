@@ -27,7 +27,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
-    Route::resource('chart-of-accounts', ChartOfAccountsController::class);
+    Route::resource('/chart-of-accounts', ChartOfAccountsController::class);
     Route::resource('general-ledger', GeneralLedgerController::class)->only(['index', 'show', 'store']); // GL might be more read-heavy
     Route::resource('sub-ledgers', SubLedgersController::class);
     // Add specific routes for sub-ledger transactions if needed

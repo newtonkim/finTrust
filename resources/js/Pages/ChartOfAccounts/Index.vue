@@ -4,19 +4,17 @@ import { Head, Link, useForm } from '@inertiajs/vue3';
 import { ref } from 'vue';
 
 const  props = defineProps({
-    chartOfAccounts: Object,
-    
+    accounts: Object,
+    allAccounts: Object, // All accounts for the parent dropdown
 });
 
 const form = useForm({
     'gl_code' : '',
-    'account_name ' : '',
-    'account_type': 'Asset',   // Default Type
-    'parent_account_id': '',
+    'name' : '', 
+    'account_type': 'Asset',
+    'parent_account_id': null,
     'description': '',
-
 });
-
 
 const showForm = ref(false);
 const editingAccount = ref(null);
@@ -43,32 +41,28 @@ const submitForm = () => {
 const editAccount = (account) => {
     editingAccount.value = account;
     form.gl_code = account.gl_code;
-    form.account_name = account.account_name;
+    form.name = account.name; 
     form.account_type = account.account_type;
     form.parent_account_id = account.parent_account_id;
     form.description = account.description;
     showForm.value = true;
 };
 
-
-const deleteAccount = (account) => {
+const deleteAccount = (id) => {
     if (confirm('Are you sure you want to delete this account?')) {
        useForm({}).delete(route('chart-of-accounts.destroy', id));
     }
 };
-
 
 const cancelForm = () => {
     showForm.value = false;
     editingAccount.value = null;
     form.reset();
 };
-
 </script>
 
 <template>
     <Head title="Chart of Accounts"/>
-
    
     <AuthenticatedLayout>
         <template #header>
@@ -91,9 +85,9 @@ const cancelForm = () => {
                                 <div v-if="form.errors.gl_code" class="text-red-500 text-sm">{{ form.errors.gl_code }}</div>
                             </div>
                             <div class="mb-4">
-                                <label for="account_name" class="block text-sm font-medium text-gray-700">Account Name</label>
-                                <input type="text" id="account_name" v-model="form.account_name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
-                                <div v-if="form.errors.account_name" class="text-red-500 text-sm">{{ form.errors.account_name }}</div>
+                                <label for="name" class="block text-sm font-medium text-gray-700">Account Name</label>
+                                <input type="text" id="name" v-model="form.name" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm" />
+                                <div v-if="form.errors.name" class="text-red-500 text-sm">{{ form.errors.name }}</div>
                             </div>
                             <div class="mb-4">
                                 <label for="account_type" class="block text-sm font-medium text-gray-700">Account Type</label>
@@ -110,8 +104,9 @@ const cancelForm = () => {
                                 <label for="parent_account_id" class="block text-sm font-medium text-gray-700">Parent Account (Optional)</label>
                                 <select id="parent_account_id" v-model="form.parent_account_id" class="mt-1 block w-full rounded-md border-gray-300 shadow-sm">
                                     <option :value="null">-- None --</option>
-                                    <option v-for="account in accounts.data" :key="account.id" :value="account.id">
-                                        {{ account.account_name }} ({{ account.gl_code }})
+                                    <!-- Use allAccounts for the dropdown -->
+                                    <option v-for="account in allAccounts" :key="account.id" :value="account.id">
+                                        {{ account.name }} ({{ account.gl_code }})
                                     </option>
                                 </select>
                                 <div v-if="form.errors.parent_account_id" class="text-red-500 text-sm">{{ form.errors.parent_account_id }}</div>
@@ -139,29 +134,47 @@ const cancelForm = () => {
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200">
-                            <tr v-for="account in accounts.data" :key="account.id">
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ account.gl_code }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ account.account_name }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ account.account_type }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ account.parent_account?.account_name || '-' }}</td>
-                                <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                                    <button @click="editAccount(account)" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</button>
-                                    <button @click="deleteAccount(account.id)" class="text-red-600 hover:text-red-900">Delete</button>
-                                </td>
-                            </tr>
+                            <!-- Check if accounts.data is not empty before rendering rows -->
+                            <template v-if="accounts.data && accounts.data.length > 0">
+                                <tr v-for="account in accounts.data" :key="account.id">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ account.gl_code }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ account.name }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ account.account_type }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{{ account.parent_account?.name || '-' }}</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+                                        <button @click="editAccount(account)" class="text-indigo-600 hover:text-indigo-900 mr-3">Edit</button>
+                                        <button @click="deleteAccount(account.id)" class="text-red-600 hover:text-red-900">Delete</button>
+                                    </td>
+                                </tr>
+                            </template>
+                            <template v-else>
+                                <tr>
+                                    <td colspan="5" class="px-6 py-4 text-center text-sm text-gray-500">No accounts found.</td>
+                                </tr>
+                            </template>
                         </tbody>
                     </table>
 
-                    <div class="mt-4">
-                        <Link v-for="link in accounts.links" :key="link.label" :href="link.url"
-                            :class="{ 'font-bold': link.active }"
-                            class="px-3 py-1 text-sm leading-5 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-100 focus:outline-none focus:ring focus:border-blue-300 mx-1"
-                            v-html="link.label"
-                        />
+                    <!-- Only show pagination links if there are multiple pages -->
+                    <div v-if="accounts.links && accounts.links.length > 3" class="mt-4 flex justify-center space-x-1">
+                        <template v-for="link in accounts.links" :key="`link-${link.label}-${link.url || 'disabled'}`">
+                            <Link v-if="link.url" 
+                                :href="link.url"
+                                :class="{ 
+                                    'bg-blue-500 text-white font-bold': link.active,
+                                    'bg-white text-gray-700 hover:bg-gray-100': !link.active 
+                                }"
+                                class="px-3 py-1 text-sm leading-5 font-medium rounded-md border focus:outline-none focus:ring focus:border-blue-300"
+                                v-html="link.label"
+                            />
+                            <span v-else
+                                class="px-3 py-1 text-sm leading-5 font-medium rounded-md text-gray-400 bg-gray-100 border"
+                                v-html="link.label"
+                            />
+                        </template>
                     </div>
                 </div>
             </div>
         </div>
     </AuthenticatedLayout>
 </template>
-

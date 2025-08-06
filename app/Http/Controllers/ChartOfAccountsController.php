@@ -8,11 +8,17 @@ use App\Models\ChartOfAccounts;
 
 class ChartOfAccountsController extends Controller
 {
-    public function index()
+     public function index()
     {
-        $accounts = ChartOfAccounts::with('parentAccount')->paginate(10);
+        $accounts = ChartOfAccounts::with('parentAccount')->paginate(20);
+
+        // Fetch all accounts (or just top-level ones) for the parent dropdown
+        // Selecting only necessary fields for efficiency
+        $allAccountsForDropdown = ChartOfAccounts::select('id', 'gl_code', 'name')->get();
+
         return Inertia::render('ChartOfAccounts/Index', [
             'accounts' => $accounts,
+            'allAccounts' => $allAccountsForDropdown, // New prop for the parent dropdown
         ]);
     }
 
@@ -21,7 +27,7 @@ class ChartOfAccountsController extends Controller
 
         $request->validate([
             'gl_code' => 'required|unique:chart_of_accounts,gl_code',
-            'account_name' => 'required',
+            'name' => 'required',
             'account_type' => 'required|in:Asset,Liability,Equity,Revenue,Expense',
             'parent_account_id' => 'nullable|exists:chart_of_accounts,id',
         ]);
@@ -38,12 +44,12 @@ class ChartOfAccountsController extends Controller
     {
         $request->validate([
             'gl_code' => 'required|unique:chart_of_accounts,gl_code,' . $chartOfAccount->id,
-            'account_name' => 'required',
+            'name' => 'required',
             'account_type' => 'required|in:Asset,Liability,Equity,Revenue,Expense',
             'parent_account_id' => 'nullable|exists:chart_of_accounts,id',
         ]);
 
-         ChartOfAccounts::update($request->all());
+         $chartOfAccount->update($request->all());
 
         return redirect()->route('chart-of-accounts.index')
                          ->with('success', 'Account updated successfully.');

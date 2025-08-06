@@ -9,9 +9,14 @@ class ChartOfAccounts extends Model
 {
     use HasFactory;
 
+    protected static function newFactory()
+    {
+        return \Database\Factories\ChartOfAccountsFactory::new();
+    }
+
        protected $fillable = [
         'gl_code',
-        'account_name',
+        'name',
         'account_type',
         'parent_account_id',
         'description',
