@@ -1,0 +1,69 @@
+:root {
+  --initial-loader-bg: #FFFFFF;
+  --initial-loader-color: #696CFF;
+}
+
+#loading-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--initial-loader-bg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.loading-logo {
+  margin-bottom: 2rem;
+}
+
+.loading {
+  position: relative;
+  width: 60px;
+  height: 60px;
+}
+
+.effects {
+  position: absolute;
+  border: 2px solid var(--initial-loader-color);
+  border-radius: 50%;
+  animation: ripple 1.2s infinite ease-in-out;
+}
+
+.effect-1 {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.effect-2 {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-delay: -0.4s;
+}
+
+.effect-3 {
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  animation-delay: -0.8s;
+}
+
+@keyframes ripple {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}

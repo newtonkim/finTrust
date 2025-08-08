@@ -1,30 +1,158 @@
 <script setup>
-import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import { Head } from '@inertiajs/vue3';
+import AnalyticsCongratulations from '@/views/dashboard/AnalyticsCongratulations.vue'
+import AnalyticsFinanceTabs from '@/views/dashboard/AnalyticsFinanceTab.vue'
+import AnalyticsOrderStatistics from '@/views/dashboard/AnalyticsOrderStatistics.vue'
+import AnalyticsProfitReport from '@/views/dashboard/AnalyticsProfitReport.vue'
+import AnalyticsTotalRevenue from '@/views/dashboard/AnalyticsTotalRevenue.vue'
+import AnalyticsTransactions from '@/views/dashboard/AnalyticsTransactions.vue'
+import CardStatisticsVertical from '@/@core/components/cards/CardStatisticsVertical.vue'
+
+// 👉 Images
+import chart from '@/images/cards/chart-success.png'
+import card from '@/images/cards/credit-card-primary.png'
+import paypal from '@/images/cards/paypal-error.png'
+import wallet from '@/images/cards/wallet-info.png'
+
+defineOptions({
+  layout: 'default',
+})
 </script>
 
 <template>
-    <Head title="Dashboard" />
+  <VRow>
+    <!-- 👉 Congratulations -->
+    <VCol
+      cols="12"
+      md="8"
+    >
+      <AnalyticsCongratulations />
+    </VCol>
 
-    <AuthenticatedLayout>
-        <template #header>
-            <h2
-                class="text-xl font-semibold leading-tight text-gray-800"
-            >
-                Dashboard
-            </h2>
-        </template>
+    <VCol
+      cols="12"
+      sm="4"
+    >
+      <VRow>
+        <!-- 👉 Profit -->
+        <VCol
+          cols="12"
+          md="6"
+        >
+          <CardStatisticsVertical
+            v-bind="{
+              title: 'Profit',
+              image: chart,
+              stats: '$12,628',
+              change: 72.80,
+            }"
+          />
+        </VCol>
 
-        <div class="py-12">
-            <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div
-                    class="overflow-hidden bg-white shadow-sm sm:rounded-lg"
-                >
-                    <div class="p-6 text-gray-900">
-                        You're logged in Newton!
-                    </div>
-                </div>
-            </div>
-        </div>
-    </AuthenticatedLayout>
+        <!-- 👉 Sales -->
+        <VCol
+          cols="12"
+          md="6"
+        >
+          <CardStatisticsVertical
+            v-bind="{
+              title: 'Sales',
+              image: wallet,
+              stats: '$4,679',
+              change: 28.42,
+            }"
+          />
+        </VCol>
+      </VRow>
+    </VCol>
+
+    <!-- 👉 Total Revenue -->
+    <VCol
+      cols="12"
+      md="8"
+      order="2"
+      order-md="1"
+    >
+      <AnalyticsTotalRevenue />
+    </VCol>
+
+    <VCol
+      cols="12"
+      sm="8"
+      md="4"
+      order="1"
+      order-md="2"
+    >
+      <VRow>
+        <!-- 👉 Payments -->
+        <VCol
+          cols="12"
+          sm="6"
+        >
+          <CardStatisticsVertical
+            v-bind=" {
+              title: 'Payments',
+              image: paypal,
+              stats: '$2,468',
+              change: -14.82,
+            }"
+          />
+        </VCol>
+
+        <!-- 👉 Revenue -->
+        <VCol
+          cols="12"
+          sm="6"
+        >
+          <CardStatisticsVertical
+            v-bind="{
+              title: 'Transactions',
+              image: card,
+              stats: '$14,857',
+              change: 28.14,
+            }"
+          />
+        </VCol>
+      </VRow>
+
+      <VRow>
+        <!-- 👉 Profit Report -->
+        <VCol
+          cols="12"
+          sm="12"
+        >
+          <AnalyticsProfitReport />
+        </VCol>
+      </VRow>
+    </VCol>
+
+    <!-- 👉 Order Statistics -->
+    <VCol
+      cols="12"
+      md="4"
+      sm="6"
+      order="3"
+    >
+      <AnalyticsOrderStatistics />
+    </VCol>
+
+    <!-- 👉 Tabs chart -->
+    <VCol
+      cols="12"
+      md="4"
+      sm="6"
+      order="3"
+    >
+      <AnalyticsFinanceTabs />
+    </VCol>
+
+    <!-- 👉 Transactions -->
+    <VCol
+      cols="12"
+      md="4"
+      sm="6"
+      order="3"
+    >
+      <AnalyticsTransactions />
+    </VCol>
+  </VRow>
 </template>

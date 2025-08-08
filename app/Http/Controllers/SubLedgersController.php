@@ -20,7 +20,7 @@ class SubLedgersController extends Controller
         // Eager load the controlling chart of accounts for each sub-ledger
         $subLedgers = SubLedger::with('chartOfAccount')->paginate(10);
         
-        $chartOfAccounts = ChartOfAccounts::select('id', 'account_name', 'gl_code')->get();
+        $chartOfAccounts = ChartOfAccounts::select('id', 'name', 'gl_code')->get();
 
         return Inertia::render('SubLedgers/Index', [
             'subLedgers' => $subLedgers,

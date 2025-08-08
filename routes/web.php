@@ -19,7 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
+    return Inertia::render('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware(['auth', 'verified'])->group(function () {
@@ -28,8 +28,8 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     Route::resource('/chart-of-accounts', ChartOfAccountsController::class);
-    Route::resource('general-ledger', GeneralLedgerController::class)->only(['index', 'show', 'store']); // GL might be more read-heavy
-    Route::resource('sub-ledgers', SubLedgersController::class);
+    Route::resource('/general-ledger', GeneralLedgerController::class)->only(['index', 'show', 'store']); // GL might be more read-heavy
+    Route::resource('/sub-ledgers', SubLedgersController::class);
     // Add specific routes for sub-ledger transactions if needed
 
 });
