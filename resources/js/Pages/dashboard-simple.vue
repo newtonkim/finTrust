@@ -54,6 +54,8 @@ defineOptions({
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
+  background-color: rgba(100, 149, 237, 0.1); /* light blue background for debugging */
+  border: 2px dashed #6495ed; /* dashed border for debugging */
 }
 
 .welcome-section {

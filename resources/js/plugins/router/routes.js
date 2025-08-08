@@ -6,7 +6,7 @@ export const routes = [
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/pages/Dashboard.vue'),
+        component: () => import('@/pages/dashboard-simple.vue'),
       },
       {
         path: 'account-settings',
@@ -34,22 +34,22 @@ export const routes = [
       },
     ],
   },
-  {
-    path: '/',
-    component: () => import('@/layouts/blank.vue'),
-    children: [
-      {
-        path: 'login',
-        component: () => import('@/pages/Auth/login.vue'),
-      },
-      {
-        path: 'register',
-        component: () => import('@/pages/Auth/register.vue'),
-      },
-      {
-        path: '/:pathMatch(.*)*',
-        component: () => import('@/pages/[...error].vue'),
-      },
-    ],
-  },
+  // {
+  //   path: '/',
+  //   component: () => import('@/layouts/blank.vue'),
+  //   children: [
+  //     {
+  //       path: 'login',
+  //       component: () => import('@/pages/Auth/login.vue'),
+  //     },
+  //     {
+  //       path: 'register',
+  //       component: () => import('@/pages/Auth/register.vue'),
+  //     },
+  //     {
+  //       path: '/:pathMatch(.*)*',
+  //       component: () => import('@/pages/[...error].vue'),
+  //     },
+  //   ],
+  // },
 ]
