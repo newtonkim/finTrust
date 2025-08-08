@@ -1,6 +1,6 @@
 <script setup>
 import logo from '@/images/logo.svg?url'
-import AuthProvider from '@/Pages/AuthProvider.vue'
+import AuthProvider from '@/pages/AuthProvider.vue'
 import authV1BottomShape from '@/images/svg/auth-v1-bottom-shape.svg?url'
 import authV1TopShape from '@/images/svg/auth-v1-top-shape.svg?url'
 
