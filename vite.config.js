@@ -73,6 +73,7 @@ export default defineConfig({
       filepath: './.eslintrc-auto-import.json',
     },
   }),
+  
   svgLoader()],
   define: { 'process.env': {} },
   resolve: {

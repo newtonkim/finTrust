@@ -6,7 +6,7 @@ export const routes = [
     children: [
       {
         path: 'dashboard',
-        component: () => import('@/pages/dashboard.vue'),
+        component: () => import('@/pages/Dashboard.vue'),
       },
       {
         path: 'account-settings',
@@ -40,11 +40,11 @@ export const routes = [
     children: [
       {
         path: 'login',
-        component: () => import('@/Pages/Auth/login.vue'),
+        component: () => import('@/pages/Auth/login.vue'),
       },
       {
         path: 'register',
-        component: () => import('@/Pages/Auth/register.vue'),
+        component: () => import('@/pages/Auth/register.vue'),
       },
       {
         path: '/:pathMatch(.*)*',
