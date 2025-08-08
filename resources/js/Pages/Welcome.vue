@@ -13,7 +13,9 @@
         </p>
         
         <div class="hero-actions">
-          <Link v-if="canLogin" href="/login" class="btn btn-primary">Get Early Access</Link>
+          <!-- <Link v-if="canLogin" href="/login" class="btn btn-primary">Get Early Access</Link> -->
+           <Link v-if="canLogin" href="/login" class="btn btn-primary">Login</Link>
+           <Link v-if="canRegister" href="/register" class="btn btn-secondary ml-4">Register</Link>
           <a href="#community" class="community-link">
             Join Community
             <svg class="arrow-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">

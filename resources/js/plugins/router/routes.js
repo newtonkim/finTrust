@@ -40,11 +40,11 @@ export const routes = [
     children: [
       {
         path: 'login',
-        component: () => import('@/pages/login.vue'),
+        component: () => import('@/Pages/Auth/login.vue'),
       },
       {
         path: 'register',
-        component: () => import('@/pages/register.vue'),
+        component: () => import('@/Pages/Auth/register.vue'),
       },
       {
         path: '/:pathMatch(.*)*',

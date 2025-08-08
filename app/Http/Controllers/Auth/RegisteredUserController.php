@@ -18,10 +18,17 @@ class RegisteredUserController extends Controller
     /**
      * Display the registration view.
      */
+
+    // public function create(): Response
+    // {
+    //     return Inertia::render('register-simple');
+    // }
+
     public function create(): Response
     {
-        return Inertia::render('register-simple');
+        return Inertia::render('Auth/register'); 
     }
+
 
     /**
      * Handle an incoming registration request.

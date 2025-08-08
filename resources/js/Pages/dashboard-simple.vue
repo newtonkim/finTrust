@@ -7,7 +7,7 @@ defineOptions({
 <template>
   <div class="dashboard-container">
     <div class="welcome-section">
-      <h1>Welcome to FinTech Dashboard</h1>
+      <h1>Welcome to FinTrust Dashboard</h1>
       <p>You have successfully logged in!</p>
     </div>
     
