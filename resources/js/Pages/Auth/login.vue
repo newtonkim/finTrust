@@ -189,7 +189,7 @@
 </template>
 
 <script setup>
-import { useForm, Link, router } from '@inertiajs/vue3'
+import { useForm, Link } from '@inertiajs/vue3'
 import { ref, watch } from 'vue'
 
 const showSuccess = ref(false)
@@ -201,14 +201,6 @@ const form = useForm({
 })
 
 const submit = () => {
-  form.post('/login', {
-    onSuccess: () => {
-      showSuccess.value = true
-      // Redirect to dashboard after 2 seconds
-      setTimeout(() => {
-        router.visit('/dashboard')
-      }, 2000)
-    }
-  })
+  form.post('/login')
 }
 </script>
