@@ -1,5 +1,14 @@
 <script setup>
 import avatar1 from '@images/avatars/avatar-1.png'
+import { usePage, router } from '@inertiajs/vue3'
+
+const page = usePage()
+const handleLogout = () => {
+  router.post('/logout', {
+    // After backend logs the user out, go to login which uses the blank layout
+    onFinish: () => router.visit('/login'),
+  })
+}
 </script>
 
 <template>
@@ -48,7 +57,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
             </template>
 
             <VListItemTitle class="font-weight-semibold">
-              John Doe
+              {{ page.props.auth?.user?.name || 'User' }}
             </VListItemTitle>
             <VListItemSubtitle>Admin</VListItemSubtitle>
           </VListItem>
@@ -110,7 +119,7 @@ import avatar1 from '@images/avatars/avatar-1.png'
           <VDivider class="my-2" />
 
           <!-- 👉 Logout -->
-          <VListItem to="/login">
+          <VListItem class="cursor-pointer" @click="handleLogout">
             <template #prepend>
               <VIcon
                 class="me-2"

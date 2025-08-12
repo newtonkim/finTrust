@@ -31,7 +31,7 @@
             <div class="sidebar-header">
               <div class="logo">
                 <span class="logo-icon">📊</span>
-                <span class="logo-text">Sneat</span>
+                <span class="logo-text">Sneat King</span>
               </div>
             </div>
             <div class="sidebar-menu">

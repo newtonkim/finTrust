@@ -20,11 +20,11 @@
     >
       <VCard>
         <VImg src="https://cdn.themeselection.com/ts-assets/sneat/sneat-vuetify-vuejs-laravel-admin-template-free/banner/banner.png" />
-        <VCardTitle>Sneat - Vuetify Laravel Admin Template</VCardTitle>
+        <VCardTitle>FinTrust</VCardTitle>
         <VCardText>
-          Sneat Admin is the most developer friendly & highly customisable Admin Dashboard Template based on Vuetify.
+         
         </VCardText>
-        <VCardText>Click on below button to explore PRO version.</VCardText>
+        <VCardText>FinTrust</VCardText>
         <VCardText>
           <VBtn
             class="me-4"

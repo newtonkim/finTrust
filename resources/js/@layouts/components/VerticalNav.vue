@@ -66,7 +66,7 @@ const handleNavScroll = evt => {
           />
 
           <h1 class="leading-normal">
-            sneat
+            FinTrust
           </h1>
         </RouterLink>
       </slot>
