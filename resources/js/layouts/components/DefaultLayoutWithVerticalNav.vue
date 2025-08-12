@@ -69,7 +69,7 @@ import UserProfile from '@/layouts/components/UserProfile.vue'
         <!-- eslint-enable -->
 
         <h1 class="app-logo-title">
-          sneat
+          FinTrust
         </h1>
       </RouterLink>
 
