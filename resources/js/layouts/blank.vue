@@ -3,7 +3,7 @@
     class="layout-wrapper layout-blank"
     data-allow-mismatch
   >
-    <RouterView />
+    <slot />
   </div>
 </template>
 

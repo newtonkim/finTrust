@@ -32,7 +32,7 @@ export default defineComponent({
         })),
       ])
 
-      const main = h('main', { class: 'layout-page-content' }, h('div', { class: 'page-content-container' }, newton))
+      const main = h('main', { class: 'layout-page-content' }, h('div', { class: 'page-content-container' }, slots.default?.()))
 
 
       // 👉 Footer

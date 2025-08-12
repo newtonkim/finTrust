@@ -13,27 +13,12 @@ use App\Http\Requests\Auth\LoginRequest;
 
 class AuthenticatedSessionController extends Controller
 {
-    /**
-     * Display the login view.
-     */
-    // public function create(): Response
-    // {
-    //     return Inertia::render('login-simple', [
-    //         'canResetPassword' => Route::has('password.request'),
-    //         'status' => session('status'),
-    //     ]);
-    // }
-
 
     public function create(): Response
     {
 
     return Inertia::render('Auth/login'); 
     }
-
-
-
-
     /**
      * Handle an incoming authentication request.
      */

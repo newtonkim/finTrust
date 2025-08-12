@@ -4,7 +4,7 @@ import DefaultLayoutWithVerticalNav from './components/DefaultLayoutWithVertical
 
 <template>
   <DefaultLayoutWithVerticalNav>
-    <RouterView />
+    <slot />
   </DefaultLayoutWithVerticalNav>
 </template>
 

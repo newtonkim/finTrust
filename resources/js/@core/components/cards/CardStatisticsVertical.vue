@@ -1,6 +1,6 @@
 <script setup>
 import { computed } from 'vue'
-import MoreBtn from '@/@core/components/MoreBtn.vue'
+import MoreBtn from '@core/components/MoreBtn.vue'
 
 const props = defineProps({
   title: {

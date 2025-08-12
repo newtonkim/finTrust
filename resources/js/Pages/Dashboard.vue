@@ -5,7 +5,7 @@ import AnalyticsOrderStatistics from '@/views/dashboard/AnalyticsOrderStatistics
 import AnalyticsProfitReport from '@/views/dashboard/AnalyticsProfitReport.vue'
 import AnalyticsTotalRevenue from '@/views/dashboard/AnalyticsTotalRevenue.vue'
 import AnalyticsTransactions from '@/views/dashboard/AnalyticsTransactions.vue'
-import CardStatisticsVertical from '@/@core/components/cards/CardStatisticsVertical.vue'
+import CardStatisticsVertical from '@core/components/cards/CardStatisticsVertical.vue'
 
 // 👉 Images
 import chart from '@/images/cards/chart-success.png'

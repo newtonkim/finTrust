@@ -242,6 +242,10 @@
 import { useForm, Link, router } from '@inertiajs/vue3'
 import { ref } from 'vue'
 
+defineOptions({
+  layout: 'blank',
+})
+
 const showSuccess = ref(false)
 
 const form = useForm({
